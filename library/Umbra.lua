@@ -3,8 +3,6 @@ local UserInputService = game:GetService("UserInputService")
 local Umbra = {}
 Umbra.Create = {}
 Umbra.Create.__index = Umbra.Create
-Umbra.Destroy = {}
-Umbra.Destroy.__index = Umbra.Destroy
 
 local Types = {
    Label = "TextLabel",
@@ -55,13 +53,19 @@ local function makeDraggable(frame)
                                                                                                                                                                                                                                        end
 
 function Umbra.Create:Window(config)
-   local self = setmetatable({}, { __index = Umbra.Create } )
+   local window = setmetatable({}, Umbra.Create)
    local ScreenGui = getObj(Types.Gui)
    local Frame = getObj(Types.Window)
    local Players = game:GetService("Players")
    local Player = Players.LocalPlayer
 
-   ScreenGui.Parent = Player.PlayerGui
+   local Player = game:GetService("Players").LocalPlayer
+   while not Player do
+       task.wait()
+       Player = game:GetService("Players").LocalPlayer
+   end
+   
+   ScreenGui.Parent = Player:WaitForChild("PlayerGui")
    Frame.Parent = ScreenGui
    self.Container = Frame
 
@@ -111,7 +115,7 @@ function Umbra.Create:Window(config)
 
    makeDraggable(Frame)
 
-   return self
+   return window
 end
 
 function Umbra.Create:Text(config)
