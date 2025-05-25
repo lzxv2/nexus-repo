@@ -1,4 +1,6 @@
 local Umbra = {}
+Umbra.Create = {}
+Umbra.Create.__index = Umbra.Create
 
 local Types = {
    Label = "TextLabel",
@@ -13,20 +15,16 @@ local Types = {
    Ratio = "UIAspectRatioConstraint"
 }
 
-function getObj(Type, Name)
-  local Name = Instance.new(Type)
-  return Name
+function getObj(Type)
+  return Instance.new(Type)
 end
 
-local Frame = getObj(Types.Window, "Frame")
+function Umbra.Create:Window(config)
+   local self = setmetatable({}, { __index = Umbra.Create } )
+   
+   local Frame = getObj(Types.Window)
 
-function Umbra.Create()
-   local self = {}
-   function self:Window()
-      self = {
-         Name = self.Name,
-         Logo = self.Logo,
-         BorderColor = self.BorderColor
-      }
-   end
+   Frame.Name = config.Name or "Window"
+   Frame.Size = UDim2.new(0, , 0, )
+   return self
 end
