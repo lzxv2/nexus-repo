@@ -54,8 +54,8 @@ end
 
 function Umbra.Create:Window(config)
    local window = setmetatable({}, Umbra.Create)
-   local ScreenGui = getObj(Types.Gui)
-   local Frame = getObj(Types.Window)
+   local window.ScreenGui = getObj(Types.Gui)
+   local window.Frame = getObj(Types.Window)
    local Players = game:GetService("Players")
    local Player = Players.LocalPlayer
 
@@ -65,29 +65,29 @@ function Umbra.Create:Window(config)
        Player = game:GetService("Players").LocalPlayer
    end
    
-   ScreenGui.Parent = Player:WaitForChild("PlayerGui")
-   Frame.Parent = ScreenGui
+   window.ScreenGui.Parent = Player:WaitForChild("PlayerGui")
+   window.Frame.Parent = ScreenGui
    self.Container = Frame
 
-   Frame.Name = config.Name or "Window"
-   Frame.Size = UDim2.new(0, 555, 0, 400)
-   Frame.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
-   Frame.BackgroundTransparency = 0.25
+   window.Frame.Name = config.Name or "Window"
+   window.Frame.Size = UDim2.new(0, 555, 0, 400)
+   window.Frame.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+   window.Frame.BackgroundTransparency = 0.25
 
    local Radius = getObj(Types.Radius)
 
-   Radius.Parent = Frame
+   Radius.Parent = window.Frame
    Radius.CornerRadius = UDim.new(0, 12)
 
    local Border = getObj(Types.Border)
 
-   Border.Parent = Frame
+   Border.Parent = window.Frame
    Border.Color = Color3.fromRGB(13, 13, 13)
    Border.Transparency = 0.65
 
    local Padding = getObj(Types.Padding)
    
-   Padding.Parent = Frame
+   Padding.Parent = window.Frame
    Padding.Top = UDim.new(0, 20)
    Padding.Left = UDim.new(0, 25)
    Padding.Right = UDim.new(0, 25)
@@ -95,25 +95,25 @@ function Umbra.Create:Window(config)
    
    local Ratio = getObj(Types.Ratio)
    
-   Ratio.Parent = Frame
+   Ratio.Parent = window.Frame
    Ratio.AspectRatio = 1.4
 
    local Logo = getObj(Types.Image)
    
-   Logo.Parent = Frame
+   Logo.Parent = window.Frame
    Logo.Size = UDim2.new(0, 40, 0, 40)
    Logo.Color3 = Color3.fromRGB(255, 255, 255)
    Logo.Image = "rbxassetid://" .. (config.Logo or "71213772696056")
 
    local Layout = getObj(Types.Layout)
    
-   Layout.Parent = Frame
+   Layout.Parent = window.Frame
    Layout.FillDirection = Enum.FillDirection.Vertical
    Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
    Layout.Padding = UDim.new(0, 30)
    Layout.SortOrder = Enum.SortOrder.Name
 
-   makeDraggable(Frame)
+   makeDraggable(window.Frame)
 
    return window
 end
@@ -121,7 +121,7 @@ end
 function Umbra.Create:Text(config)
    local Label = getObj(Types.Label)
 
-   Label.Parent = self.Container
+   Label.Parent = window.Container
    
    Label.Name = config.Name or "Label"
    Label.Size = UDim2.new(0, 20, 0, 20)
