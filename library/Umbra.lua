@@ -2,7 +2,7 @@ local UserInputService = game:GetService("UserInputService")
 
 local Umbra = {}
 Umbra.Create = {}
-Umbra.Create.__index = Umbra.Create()
+Umbra.Create.__index = Umbra.Create
 Umbra.Destroy = {}
 Umbra.Destroy.__index = Umbra.Destroy
 
