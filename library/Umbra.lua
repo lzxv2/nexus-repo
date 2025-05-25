@@ -12,7 +12,9 @@ local Types = {
    Radius = "UICorner",
    Border = "UIStroke",
    Layout = "UIListLayout",
-   Ratio = "UIAspectRatioConstraint"
+   Ratio = "UIAspectRatioConstraint",
+   Scroller = "ScrollingFrame",
+   Gui = "ScreenGui"
 }
 
 function getObj(Type)
@@ -21,8 +23,10 @@ end
 
 function Umbra.Create:Window(config)
    local self = setmetatable({}, { __index = Umbra.Create } )
-   
+   local ScreenGui = getObj(Types.Gui)
    local Frame = getObj(Types.Window)
+
+   Frame.Parent = ScreenGui
 
    Frame.Name = config.Name or "Window"
    Frame.Size = UDim2.new(0, 555, 0, 400)
@@ -32,6 +36,25 @@ function Umbra.Create:Window(config)
    local Radius = getObj(Types.Radius)
 
    Radius.Parent = Frame
-   Radius.CornerRadius = 12
+   Radius.CornerRadius = UDim.new(0, 12)
+
+   local Border = getObj(Types.Border)
+
+   Border.Parent = Frame
+   Border.Color = Color3.fromRGB(13, 13, 13)
+   Border.Transparency = 0.65
+
+   local Padding = getObj(Types.Padding)
+   
+   Padding.Parent = Frame
+   Padding.Top = UDim.new(0, 20)
+   Padding.Left = UDim.new(0, 25)
+   Padding.Right = UDim.new(0, 25)
+   Padding.Bottom = UDim.new(0, 20)
+   
+   local Ratio = getObj(Types.Ratio)
+   
+   Ratio.Parent = Frame
+
    return self
 end
