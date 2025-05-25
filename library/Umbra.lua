@@ -99,7 +99,7 @@ function Umbra.Create:Window(config)
    Logo.Parent = Frame
    Logo.Size = UDim2.new(0, 40, 0, 40)
    Logo.Color3 = Color3.fromRGB(255, 255, 255)
-   Logo.Image = "rbxassetid://" .. (config.Logo or "")
+   Logo.Image = "rbxassetid://" .. (config.Logo or "71213772696056")
 
    local Layout = getObj(Types.Layout)
    
