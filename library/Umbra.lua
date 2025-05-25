@@ -1,3 +1,5 @@
+local UserInputService = game:GetService("UserInputService")
+
 local Umbra = {}
 Umbra.Create = {}
 Umbra.Create.__index = Umbra.Create()
@@ -22,6 +24,35 @@ local Types = {
 function getObj(Type)
   return Instance.new(Type)
 end
+
+local function makeDraggable(frame)
+   local dragging = false
+   local dragStart
+   local startPos
+
+   frame.InputBegan:Connect(function(input)
+                           if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                                       dragging = true
+                                                   dragStart = input.Position
+                                                               startPos = frame.Position
+
+                                                                           input.Changed:Connect(function()
+                                                                                           if input.UserInputState == Enum.UserInputState.End then
+                                                                                                               dragging = false
+                                                                                                                               end
+                                                                                                                                           end)
+                                                                                                                                                   end
+                                                                                                                                                       end)
+
+                                                                                                                                                           frame.InputChanged:Connect(function(input)
+                                                                                                                                                                   if input.UserInputType == Enum.UserInputType.MouseMovement then
+                                                                                                                                                                               if dragging then
+                                                                                                                                                                                               local delta = input.Position - dragStart
+                                                                                                                                                                                                               frame.Position = startPos + UDim2.new(0, delta.X, 0, delta.Y)
+                                                                                                                                                                                                                           end
+                                                                                                                                                                                                                                   end
+                                                                                                                                                                                                                                       end)
+                                                                                                                                                                                                                                       end
 
 function Umbra.Create:Window(config)
    local self = setmetatable({}, { __index = Umbra.Create } )
@@ -77,6 +108,8 @@ function Umbra.Create:Window(config)
    Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
    Layout.Padding = UDim.new(0, 30)
    Layout.SortOrder = Enum.SortOrder.Name
+
+   makeDraggable(Frame)
 
    return self
 end
