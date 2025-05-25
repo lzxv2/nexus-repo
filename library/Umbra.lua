@@ -24,33 +24,33 @@ function getObj(Type)
 end
 
 local function makeDraggable(frame)
-   local dragging = false
-   local dragStart
-   local startPos
+    local dragging = false
+    local dragStart
+    local startPos
 
-   frame.InputBegan:Connect(function(input)
-                           if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                                       dragging = true
-                                                   dragStart = input.Position
-                                                               startPos = frame.Position
+    frame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPos = frame.Position
 
-                                                                           input.Changed:Connect(function()
-                                                                                           if input.UserInputState == Enum.UserInputState.End then
-                                                                                                               dragging = false
-                                                                                                                               end
-                                                                                                                                           end)
-                                                                                                                                                   end
-                                                                                                                                                       end)
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
+                end
+            end)
+        end
+    end)
 
-                                                                                                                                                           frame.InputChanged:Connect(function(input)
-                                                                                                                                                                   if input.UserInputType == Enum.UserInputType.MouseMovement then
-                                                                                                                                                                               if dragging then
-                                                                                                                                                                                               local delta = input.Position - dragStart
-                                                                                                                                                                                                               frame.Position = startPos + UDim2.new(0, delta.X, 0, delta.Y)
-                                                                                                                                                                                                                           end
-                                                                                                                                                                                                                                   end
-                                                                                                                                                                                                                                       end)
-                                                                                                                                                                                                                                       end
+    frame.InputChanged:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
+            if dragging then
+                local delta = input.Position - dragStart
+                frame.Position = startPos + UDim2.new(0, delta.X, 0, delta.Y)
+            end
+        end
+    end)
+end
 
 function Umbra.Create:Window(config)
    local window = setmetatable({}, Umbra.Create)
@@ -138,5 +138,7 @@ function Umbra.Create:Text(config)
 end
 
 function Umbra.Destroy(Item)
+   if Item then
      Item:Destroy()
+   end
 end
