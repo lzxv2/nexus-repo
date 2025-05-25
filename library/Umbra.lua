@@ -1,6 +1,8 @@
 local Umbra = {}
 Umbra.Create = {}
-Umbra.Create.__index = Umbra.Create
+Umbra.Create.__index = Umbra.Create()
+Umbra.Destroy = {}
+Umbra.Destroy.__index = Umbra.Destroy
 
 local Types = {
    Label = "TextLabel",
@@ -62,13 +64,15 @@ function Umbra.Create:Window(config)
    Ratio.AspectRatio = 1.4
 
    local Logo = getObj(Types.Image)
-
+   
+   Logo.Parent = Frame
    Logo.Size = UDim2.new(0, 40, 0, 40)
    Logo.Color3 = Color3.fromRGB(255, 255, 255)
-   Logo.Image = "rbxassetid://" .. config.Logo or "rbxassetid://"
+   Logo.Image = "rbxassetid://" .. (config.Logo or "")
 
    local Layout = getObj(Types.Layout)
-
+   
+   Layout.Parent = Frame
    Layout.FillDirection = Enum.FillDirection.Vertical
    Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
    Layout.Padding = UDim.new(0, 30)
@@ -80,9 +84,22 @@ end
 function Umbra.Create:Text(config)
    local Label = getObj(Types.Label)
 
-   Label.Size = 20
+   Label.Parent = self.Container
+   
+   Label.Name = config.Name or "Label"
+   Label.Size = UDim2.new(0, 20, 0, 20)
    Label.Text = config.Text or "New Label"
-   Label.Color = Color3.fromRGB(237, 237, 237)
+   Label.TextColor3 = Color3.fromRGB(237, 237, 237)
+   Label.Font = Enum.Font.Ubuntu
+   Label.Position = UDim2.new()
+   Label.BackgroundTransparency = 1
+   Label.TextSize = 18
+   Label.TextXAlignment = Enum.TextXAlignment.Left
+   Label.TextYAlignment = Enum.TextYAlignment.Center
 
    return Label
+end
+
+function Umbra.Destroy(Item)
+     Item:Destroy()
 end
