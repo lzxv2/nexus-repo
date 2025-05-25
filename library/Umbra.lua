@@ -28,5 +28,10 @@ function Umbra.Create:Window(config)
    Frame.Size = UDim2.new(0, 555, 0, 400)
    Frame.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
    Frame.BackgroundTransparency = 0.25
+
+   local Radius = getObj(Types.Radius)
+
+   Radius.Parent = Frame
+   Radius.CornerRadius = 12
    return self
 end
