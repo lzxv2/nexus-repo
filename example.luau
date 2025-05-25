@@ -1,5 +1,5 @@
-local players = game:GetService("Players")
-local player = players.LocalPlayer
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
 
 local button = script.Parent
 
