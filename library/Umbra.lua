@@ -66,8 +66,8 @@ function Umbra.Create:Window(config)
    end
    
    window.ScreenGui.Parent = Player:WaitForChild("PlayerGui")
-   window.Frame.Parent = ScreenGui
-   self.Container = Frame
+   window.Frame.Parent = window.ScreenGui
+   window.Container = window.Frame
 
    window.Frame.Name = config.Name or "Window"
    window.Frame.Size = UDim2.new(0, 555, 0, 400)
