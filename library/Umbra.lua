@@ -118,25 +118,6 @@ function Umbra.Create:Window(config)
    return window
 end
 
-function window:Text(config)
-   local Label = getObj(Types.Label)
-
-   Label.Parent = window.Container
-   
-   Label.Name = config.Name or "Label"
-   Label.Size = UDim2.new(0, 20, 0, 20)
-   Label.Text = config.Text or "New Label"
-   Label.TextColor3 = Color3.fromRGB(237, 237, 237)
-   Label.Font = Enum.Font.Ubuntu
-   Label.Position = UDim2.new()
-   Label.BackgroundTransparency = 1
-   Label.TextSize = 18
-   Label.TextXAlignment = Enum.TextXAlignment.Left
-   Label.TextYAlignment = Enum.TextYAlignment.Center
-
-   return Label
-end
-
 function Umbra.Destroy(Item)
    if Item then
      Item:Destroy()
