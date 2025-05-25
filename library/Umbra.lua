@@ -118,7 +118,7 @@ function Umbra.Create:Window(config)
    return window
 end
 
-function Umbra.Create:Text(config)
+function window:Text(config)
    local Label = getObj(Types.Label)
 
    Label.Parent = window.Container
