@@ -25,6 +25,8 @@ function Umbra.Create:Window(config)
    local Frame = getObj(Types.Window)
 
    Frame.Name = config.Name or "Window"
-   Frame.Size = UDim2.new(0, , 0, )
+   Frame.Size = UDim2.new(0, 555, 0, 400)
+   Frame.BackgroundColor3 = Color3.fromRGB(13, 13, 13)
+   Frame.BackgroundTransparency = 0.25
    return self
 end
