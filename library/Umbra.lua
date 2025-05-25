@@ -25,8 +25,12 @@ function Umbra.Create:Window(config)
    local self = setmetatable({}, { __index = Umbra.Create } )
    local ScreenGui = getObj(Types.Gui)
    local Frame = getObj(Types.Window)
+   local Players = game:GetService("Players")
+   local Player = Players.LocalPlayer
 
+   ScreenGui.Parent = Player.PlayerGui
    Frame.Parent = ScreenGui
+   self.Container = Frame
 
    Frame.Name = config.Name or "Window"
    Frame.Size = UDim2.new(0, 555, 0, 400)
@@ -55,6 +59,30 @@ function Umbra.Create:Window(config)
    local Ratio = getObj(Types.Ratio)
    
    Ratio.Parent = Frame
+   Ratio.AspectRatio = 1.4
+
+   local Logo = getObj(Types.Image)
+
+   Logo.Size = UDim2.new(0, 40, 0, 40)
+   Logo.Color3 = Color3.fromRGB(255, 255, 255)
+   Logo.Image = "rbxassetid://" .. config.Logo or "rbxassetid://"
+
+   local Layout = getObj(Types.Layout)
+
+   Layout.FillDirection = Enum.FillDirection.Vertical
+   Layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+   Layout.Padding = UDim.new(0, 30)
+   Layout.SortOrder = Enum.SortOrder.Name
 
    return self
+end
+
+function Umbra.Create:Text(config)
+   local Label = getObj(Types.Label)
+
+   Label.Size = 20
+   Label.Text = config.Text or "New Label"
+   Label.Color = Color3.fromRGB(237, 237, 237)
+
+   return Label
 end
